@@ -54,8 +54,7 @@ class Predictor(BasePredictor):
             )
         else:
             raise ValueError(f"Unknown scheduler: {scheduler}")
-        # xformers
-        self.pipe.enable_xformers_memory_efficient_attention()
+
         image = self.pipe(
             prompt=prompt,
             negative_prompt=negative_prompt,
