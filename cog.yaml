@@ -12,7 +12,6 @@ build:
     - "accelerate==0.21.0"
     - "numpy==1.25.1"
     - "omegaconf==2.3.0"
-    - "xformers"
 
 # predict.py defines how predictions are run on your model
 predict: "predict.py:Predictor"
