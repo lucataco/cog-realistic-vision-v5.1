@@ -19,7 +19,6 @@ class Predictor(BasePredictor):
             MODEL_NAME,
             cache_dir=MODEL_CACHE
         )
-        self.pipe.enable_xformers_memory_efficient_attention()
         self.pipe.to("cuda")
 
     def predict(
@@ -31,7 +30,7 @@ class Predictor(BasePredictor):
         scheduler: str = Input(
             default="EulerA",
             choices=["EulerA", "MultistepDPM-Solver"],
-            description="Choose a scheduler. If you use an init image, PNDM will be used",
+            description="Choose a scheduler",
         ),
         width: int = Input(description="Width", ge=0, le=1920, default=512),
         height: int = Input(description="Height", ge=0, le=1920, default=728),
@@ -55,7 +54,8 @@ class Predictor(BasePredictor):
             )
         else:
             raise ValueError(f"Unknown scheduler: {scheduler}")
-
+        # xformers
+        self.pipe.enable_xformers_memory_efficient_attention()
         image = self.pipe(
             prompt=prompt,
             negative_prompt=negative_prompt,
@@ -66,7 +66,7 @@ class Predictor(BasePredictor):
             generator=generator
         ).images[0]
 
-        output_path = Path(tempfile.mkdtemp()) / "ai.png"
+        output_path = Path(tempfile.mkdtemp()) / "output.png"
         image.save(output_path)
 
         return  Path(output_path)
