@@ -8,7 +8,7 @@ First, download the pre-trained weights:
 
 Then, you can run predictions:
 
-    cog predict -i prompt="RAW photo, a portrait photo of a latina woman in casual clothes, natural skin, 8k uhd, high quality, film grain, Fujifilm XT3" -i seed=1339"
+    cog predict -i prompt="RAW photo, a portrait photo of a latina woman in casual clothes, natural skin, 8k uhd, high quality, film grain, Fujifilm XT3" -i seed=1339
 
 ## Example
 

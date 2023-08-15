@@ -1,13 +1,17 @@
 # Prediction interface for Cog ⚙️
 from cog import BasePredictor, Input, Path
 import os
-import torch
 import math
-from diffusers import StableDiffusionPipeline, EulerAncestralDiscreteScheduler, DPMSolverMultistepScheduler
+import torch
+import huggingface_hub
+from diffusers import StableDiffusionPipeline, EulerAncestralDiscreteScheduler, DPMSolverMultistepScheduler, AutoencoderKL
 import tempfile
 
 MODEL_NAME = "SG161222/Realistic_Vision_V5.1_noVAE"
+VAE_NAME = "stabilityai/sd-vae-ft-mse-original"
+VAE_CKPT = "vae-ft-mse-840000-ema-pruned.ckpt"
 MODEL_CACHE = "cache"
+VAE_CACHE = "vae-cache"
 
 class Predictor(BasePredictor):
     def base(self, x):
@@ -15,11 +19,15 @@ class Predictor(BasePredictor):
 
     def setup(self):
         """Load the model into memory to make running multiple predictions efficient"""
-        self.pipe = StableDiffusionPipeline.from_pretrained(
-            MODEL_NAME,
-            cache_dir=MODEL_CACHE
+        vae = AutoencoderKL.from_single_file(
+            "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/blob/main/vae-ft-mse-840000-ema-pruned.safetensors",
+            cache_dir=VAE_CACHE
         )
-        self.pipe.to("cuda")
+        pipe = StableDiffusionPipeline.from_pretrained(
+            MODEL_CACHE,
+            vae=vae,
+        )
+        self.pipe = pipe.to("cuda")
 
     def predict(
         self,
