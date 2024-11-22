@@ -1,5 +1,7 @@
 # SG161222/Realistic_Vision_V5.1_noVAE Cog model
 
+[![Try a demo on Replicate](https://replicate.com/lucataco/realistic-vision-v5.1/badge)](https://replicate.com/lucataco/realistic-vision-v5.1)
+
 This is an implementation of the [SG161222/Realistic_Vision_V5.1_noVAE](https://huggingface.co/SG161222/Realistic_Vision_V5.1_noVAE) as a Cog model. [Cog packages machine learning models as standard containers.](https://github.com/replicate/cog)
 
 First, download the pre-trained weights:
