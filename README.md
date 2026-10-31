@@ -17,3 +17,9 @@ Then, you can run predictions:
 Output:
 
 ![alt text](output.png)
+
+## License
+
+The code in this repository is licensed under the [Apache License 2.0](LICENSE).
+
+The model weights are not covered by this license. [SG161222/Realistic_Vision_V5.1_noVAE](https://huggingface.co/SG161222/Realistic_Vision_V5.1_noVAE) is released under the [CreativeML Open RAIL-M](https://huggingface.co/spaces/CompVis/stable-diffusion-license) license. Check its terms before use.
